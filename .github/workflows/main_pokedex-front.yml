@@ -7,7 +7,12 @@ on:
   push:
     branches:
       - main
+    paths:
+      - 'GestaoProjetosEquipe3/pokedex-front/**' # Só roda se mudar o front
   workflow_dispatch:
+
+env:
+  FRONTEND_PATH: 'GestaoProjetosEquipe3/pokedex-front'
 
 jobs:
   build:
@@ -24,6 +29,7 @@ jobs:
           node-version: '22.x'
 
       - name: npm install, build, and test
+        working-directory: ${{ env.FRONTEND_PATH }}
         run: |
           npm install
           npm run build --if-present
@@ -33,7 +39,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: .
+          path: ${{ env.FRONTEND_PATH }}/dist
 
   deploy:
     runs-on: ubuntu-latest
