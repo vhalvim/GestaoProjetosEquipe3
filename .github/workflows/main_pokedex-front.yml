@@ -59,3 +59,4 @@ jobs:
           slot-name: 'Production'
           package: .
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_C8BE3BD270EE42E8A80F8A0A2823675B }}
+          clean: true
