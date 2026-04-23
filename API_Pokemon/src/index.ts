@@ -6,13 +6,12 @@ const app = express();
 const PORTA = 8000;
 
 // 1. Ativa o CORS para permitir que o Frontend acesse do localhost 
+
 app.use(cors({
-  origin: [
-    'https://gestaoprojetosequipe3-testes.vercel.app', // Sua URL do print
-    'http://localhost:5173' // Para você continuar conseguindo testar local
-  ],
+  // Aqui você coloca a URL do seu Web App de Frontend que acabou de criar no Azure
+  origin: 'https://pokedex-front.azurewebsites.net', 
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
-  credentials: true
+  allowedHeaders: ['Content-Type', 'Authorization']
 }));
 // 2. Permite que o servidor entenda JSON (útil para a Sprint 2)
 app.use(express.json());
