@@ -9,7 +9,7 @@ const PORTA = 8000;
 
 app.use(cors({
   // Aqui você coloca a URL do seu Web App de Frontend que acabou de criar no Azure
-  origin: 'https://pokedex-front.azurewebsites.net', 
+  origin: ['https://gestaoprojetosequipe3-testes.vercel.app', 'https://pokedex-front.azurewebsites.net', 'http://localhost:5173'],
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
