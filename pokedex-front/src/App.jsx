@@ -3,6 +3,7 @@ import { PokemonCard } from "./components/ui/PokemonCard";
 import AnimatedButton from "./components/ui/AnimatedButton";
 import { FilterBar } from "./components/ui/FilterBar";
 import { api } from "./config/api";
+import { PokemonModal } from "./components/ui/PokemonModal";
 
 const PokeballIcon = () => (
   <svg
@@ -38,8 +39,8 @@ function App() {
 
   const [page, setPage] = useState(1);
   const [lastPage, setLastPage] = useState(1);
-  const [limit, setLimit] = useState(18); // Novo estado para itens por página
-  const [inputPage, setInputPage] = useState("1"); // Novo estado para o input digitável
+  const [limit, setLimit] = useState(18); 
+  const [inputPage, setInputPage] = useState("1"); 
   const [meta, setMeta] = useState({ current_page: 1, last_page: 9 });
 
   const [busca, setBusca] = useState("");
@@ -48,6 +49,8 @@ function App() {
 
   const [tipo1, setTipo1] = useState("all");
   const [tipo2, setTipo2] = useState("all");
+
+  const [pokemonModalAberto, setPokemonModalAberto] = useState(null);
 
   // 1º CORREÇÃO: O timer da busca voltou!
   useEffect(() => {
@@ -155,13 +158,19 @@ function App() {
           <>
             <main className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-x-6 gap-y-12 mb-16 min-h-100">
               {pokemons.map((poke) => (
-                <PokemonCard
+                <div
                   key={poke.id}
-                  id={poke.id}
-                  name={poke.name}
-                  types={poke.types}
-                  image_url={poke.image_url}
-                />
+                  onClick={() => setPokemonModalAberto(poke.id)}
+                  className="cursor-pointer"
+                >
+                  <PokemonCard
+                    key={poke.id}
+                    id={poke.id}
+                    name={poke.name}
+                    types={poke.types}
+                    image_url={poke.image_url}
+                  />
+                </div>
               ))}
             </main>
 
@@ -294,6 +303,10 @@ function App() {
             </div>
           </>
         )}
+        <PokemonModal
+          pokemonId={pokemonModalAberto}
+          onClose={() => setPokemonModalAberto(null)}
+        />
       </div>
     </div>
   );
