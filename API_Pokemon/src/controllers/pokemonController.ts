@@ -33,7 +33,7 @@ export const getPokemons = async (req: Request, res: Response) => {
 
 export const getPokemonById = async (req: Request, res: Response) => {
   try {
-    const { id } = req.params;
+    const  id  = req.params.id as string;
     const data = await buscarPokemonPorId(id);
     res.json({ success: true, data });
   } catch (error) {
